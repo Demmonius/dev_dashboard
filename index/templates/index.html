@@ -33,10 +33,16 @@
 	</div>
 
 	<script>
-		let addButton = document.getElementById('add');	
+		let addButton = document.getElementById('add');
 		addButton.style.cursor = 'pointer';
 		addButton.onclick = function() {
-			window.open("/addWidget", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+			const win = window.open("/addWidget", "Add a widget in dashboard", 'resizable=0,width=350,height=250');
+			window.addEventListener('message', event => {
+  				if (event.origin === 'http://localhost:8080') {
+    					if (event.data === 'close')
+						win.close()
+				}
+			})
 		};
 </script>
 {% endblock %}

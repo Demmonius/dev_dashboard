@@ -8,23 +8,37 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6">
 				<div class="card">
-				    <div class="card-header">
-					<strong class="card-title">Standard Select</strong>
-				    </div>
-				    <div class="card-body">
-					<select data-placeholder="Choose a Country..." class="standardSelect" tabindex="1">
-					    
-					<option value=""></option>
-					{% for widget in widgets%}
-						<option value="{{widget.api_url}}">{{widget.name}}</option>
-					{% endfor %}
-					</select>
-				    </div>
+					<div class="card-header">
+						<strong class="card-title">Standard Select</strong>
+				    	</div>
+				    	<div class="card-body">
+						<select onchange="updateWidgets()" data-placeholder="Choose a service to add" class="standardSelect" tabindex="1">
+							<option value=""></option>
+							{% for widget in widgets%}
+								<option value="{{widget.api_route}}">{{widget.name}}</option>
+							{% endfor %}
+						</select>
+				    	</div>
+					<button type="button" id="Validate" class="btn btn-primary btn-sm">
+						<i class="fa fa-dot-circle-o"></i> Submit
+					</button>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block script %}
 <script>
+	function updateWidgets() {
+
+	}
+	document.getElementById('Validate').addEventListener('click', () => {
+		window.opener.postMessage('close', 'http://localhost:8080')
+	});
+
         jQuery(document).ready(function() {
-            jQuery(".standardSelect").chosen({
+        jQuery(".standardSelect").chosen({
                 disable_search_threshold: 10,
                 no_results_text: "Oops, nothing found!",
                 width: "100%"

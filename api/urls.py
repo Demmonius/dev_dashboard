@@ -6,7 +6,8 @@ from django.urls import path, include
 from weather_service.apps import WeatherServiceConfig
 
 router = routers.DefaultRouter()
-router.register(WeatherServiceConfig.api_route, CityWeatherViewSet)
+    
+router.register(WeatherServiceConfig.about["widgets"][0]["api_route"], CityWeatherViewSet)
 router.register('users', UserViewSet)
 
 

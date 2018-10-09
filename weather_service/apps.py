@@ -7,14 +7,12 @@ class WeatherServiceConfig(AppConfig):
 	about = {
         	"name": name,
         	"widgets": [{
-			"name": "city_weather" ,
+			"name": "City Weather" ,
         	    	"description": "Show the city's weather" ,
         	    	"params": [{
 				"name": "city" ,
 				"type": "string"
-			}]
+			}],
+			"api_route": "city_weather",
 		}]
 	}
-
-	args = [x["params"] for x in about["widgets"]]
-	api_route = "city_weather"

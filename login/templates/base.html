@@ -154,7 +154,7 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {% if user.is_authenticated %}                                
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt={{ username }}>
+                            <!-- <img class="user-avatar rounded-circle" src="images/admin.jpg" alt={{ username }}> -->
                             {% endif %}
                         </a>
 
@@ -226,6 +226,7 @@
     <script src="{% static "assets/js/lib/vector-map/jquery.vmap.sampledata.js" %}"></script>
     <script src="{% static "assets/js/lib/vector-map/country/jquery.vmap.world.js" %}"></script>
     <script src="{% static "assets/js/lib/chosen/chosen.jquery.min.js" %}"></script>
+    {% block script %}{% endblock %}
     <script>
         ( function ( $ ) {
             "use strict";

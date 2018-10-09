@@ -19,12 +19,12 @@ class Index(View):
 class AddWidget(View):
 	def get(self, request):
 		widgets = []
-		for widget in [WeatherServiceConfig]:
-			o = {
-				'api_url': "/api/" + widget.api_route,
-				'name': widget.name
-			}
-		widgets.append(o)
+		for services in [WeatherServiceConfig]:
+			for widget in services.about["widgets"]:
+				widgets.append({
+					'api_url': "/api/" + widget["api_route"],
+					'name': widget["name"],
+				})
 		return render(request, 'addWidget.html', {
 			'widgets': widgets
 		})
