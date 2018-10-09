@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+{% for weather in widgets.weather %}
+<div class="col-xl-3 col-lg-6">
+		<div class="card">
+			<div class="card-body">
+				<div class="stat-widget-one">
+				<img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+				    <div class="stat-content dib">
+				<div class="stat-text">{{ weather.city }}</div>
+				<div class="stat-digit">{{ weather.description }}</div>
+				<div class="stat-digit">{{ weather.temperature }}° F</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	</div>
+{% endfor %}
+	<div class="card col-lg-2 col-md-6 no-padding no-shadow" id="add">
+		<div class="card-body bg-flat-color-2">
+			<div class="h1 text-muted text-right mb-4">
+				<!-- <i class="fa fa-user-plus text-light"></i> -->
+			</div>
+			<div class="h4 mb-0 text-light">
+				ADD
+			</div>
+			<small class="text-uppercase font-weight-bold text-light">WIDGETS</small>
+			<div class="progress progress-xs mt-3 mb-0 bg-light" style="width: 40%; height: 5px;"></div>
+		</div>
+	</div>
+
+	<script>
+		let addButton = document.getElementById('add');	
+		addButton.style.cursor = 'pointer';
+		addButton.onclick = function() {
+			window.open("/addWidget", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+		};
+</script>
+{% endblock %}

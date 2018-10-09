@@ -23,5 +23,8 @@ urlpatterns = [
     path('about.json/', About.as_view(), name='about'),
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
-    path('weather/', test)
+    path('', include('index.urls')),
+    path('api/', include('api.urls')),
+    path('weather/', test),
+    
 ]

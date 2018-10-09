@@ -4,16 +4,6 @@ from django.contrib.auth.models import User
 import requests
 # Create your models here.
 
-class CityTemperature(models.Model):
-	city = models.CharField(max_length=30)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return "Temperature of " + self.city
-	
-	class Meta:
-        	verbose_name_plural = 'Cities temperature'
-
 class CityWeather(models.Model):
 	city = models.CharField(max_length=30)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
