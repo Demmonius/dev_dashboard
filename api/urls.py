@@ -7,7 +7,9 @@ from weather_service.apps import WeatherServiceConfig
 
 router = routers.DefaultRouter()
 
-for service in [WeatherServiceConfig]:
+for service in [
+	WeatherServiceConfig,
+	]:
 	for widget in service.widgets:
         	router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])
 router.register('users', UserViewSet)

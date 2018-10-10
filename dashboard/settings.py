@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'weather_service',
     'about',
     'index',
-    'login'
+    'login',
+    'news_service'
 ]
 
 MIDDLEWARE = [

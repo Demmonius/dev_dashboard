@@ -26,5 +26,6 @@ urlpatterns = [
     path('', include('index.urls')),
     path('api/', include('api.urls')),
     path('weather/', test),
+    path('news/', test),
     
 ]
