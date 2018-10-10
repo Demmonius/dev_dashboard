@@ -4,11 +4,13 @@ from api.views import CityWeatherViewSet, UserViewSet
 from django.urls import path, include
 
 from weather_service.apps import WeatherServiceConfig
+from news_service.apps import NewsServiceConfig
 
 router = routers.DefaultRouter()
 
 for service in [
 	WeatherServiceConfig,
+	NewsServiceConfig,
 	]:
 	for widget in service.widgets:
         	router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])

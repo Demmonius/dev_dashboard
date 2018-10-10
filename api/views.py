@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from news_service.models import News
 from weather_service.models import CityWeather
-from .serializers import CityWeatherSerializer, UserSerializer
+from .serializers import CityWeatherSerializer, UserSerializer, NewsSerializer
 
 # Create your views here.
 
@@ -19,4 +19,4 @@ class CityWeatherViewSet(viewsets.ModelViewSet):
 
 class NewsViewSet(viewsets.ModelViewSet):
 	queryset = News.objects.all()
-	serializer_class = CityWeatherSerializer
+	serializer_class = NewsSerializer

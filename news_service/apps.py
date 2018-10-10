@@ -1,10 +1,13 @@
 from django.apps import AppConfig
 
+from .models import News
+from api.serializers import NewsSerializer
+from api.views import NewsViewSet
 
 class NewsServiceConfig(AppConfig):
-    name = 'news_service'
+	name = 'news_service'
 
-    about = {
+	about = {
         	"name": name,
         	"widgets": [{
 			"name": "News" ,
@@ -13,7 +16,18 @@ class NewsServiceConfig(AppConfig):
 				"name": "topic" ,
 				"type": "string"
 			}],
-			"api_route": "news",
 		}]
 	}
+
+	widgets = [{
+		"name": name,
+		"model": News,
+		#"form": CityWeatherForm,
+		"api": {
+			"api_route": "news",
+			"api_url": "/api/news",
+			"ViewSet": NewsViewSet,
+			"Serializer": NewsSerializer
+		}
+	}]
     
