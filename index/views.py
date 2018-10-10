@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 from weather_service.models import CityWeather
 from weather_service.apps import WeatherServiceConfig
 
-services = [WeatherServiceConfig]
+services = [
+	WeatherServiceConfig,
+	]
 class Index(View):
 	def get(self, request):
 		return render(request, 'index.html', {

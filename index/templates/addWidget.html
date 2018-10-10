@@ -24,7 +24,7 @@
 								{% csrf_token %}
 								
 								<button type="submit" id="Validate" class="btn btn-primary btn-sm">
-										<i class="fa fa-dot-circle-o"></i>add
+										<i class="fa fa-dot-circle-o"></i> Add
 									</button>
 							</form>
 						{% endfor %}
@@ -54,9 +54,6 @@
 				let backup = form.innerHTML;
 				let lo = ""
 				{% for field in form.form %}
-					{% if not "user" in field %}
-						lo += '{{ field }}';
-					{% endif %}
 				{% endfor %}
 				form.innerHTML = '{{form.form}}' + backup
 				input.setAttribute("value", "{{form.name}}");
