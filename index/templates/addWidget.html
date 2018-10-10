@@ -12,16 +12,23 @@
 						<strong class="card-title">Standard Select</strong>
 				    	</div>
 				    	<div class="card-body">
-						<select onchange="updateWidgets()" data-placeholder="Choose a service to add" class="standardSelect" tabindex="1">
+						<select onchange="updateWidgets()" data-placeholder="Choose a service to add" class="standardSelect" tabindex="1" id="chooseWidget">
 							<option value=""></option>
-							{% for widget in widgets%}
-								<option value="{{widget.api_route}}">{{widget.name}}</option>
+							{% for form in forms%}
+								<!-- <option value="{{widget.api_route}}">{{widget.name}}</option> -->
+								<option value="{{form.name}}">{{form.name}}</option>
 							{% endfor %}
 						</select>
-				    	</div>
-					<button type="button" id="Validate" class="btn btn-primary btn-sm">
-						<i class="fa fa-dot-circle-o"></i> Submit
-					</button>
+						{% for form in forms%}
+							<form method="post" action="/addWidget/" name="addWidget" id="form" onsubmit="return closeSelf()">
+								{% csrf_token %}
+								
+								<button type="submit" id="Validate" class="btn btn-primary btn-sm">
+										<i class="fa fa-dot-circle-o"></i>add
+									</button>
+							</form>
+						{% endfor %}
+					    </div>
 				</div>
 			</div>
 		</div>
@@ -30,7 +37,33 @@
 {% endblock %}
 {% block script %}
 <script>
+	function closeSelf() {
+		document.forms['addWidget'].submit();
+		// window.close();
+	}
 	function updateWidgets() {
+		var e = document.getElementById("chooseWidget");
+		var value = e.options[e.selectedIndex].value;
+		var form = document.getElementById("form")
+		var input = document.createElement("input");
+
+		input.setAttribute("type", "hidden");
+		input.setAttribute("name", "widget_name");
+		{% for form in forms %}
+			if ("{{form.name}}" == value) {
+				let backup = form.innerHTML;
+				let lo = ""
+				{% for field in form.form %}
+					{% if not "user" in field %}
+						lo += '{{ field }}';
+					{% endif %}
+				{% endfor %}
+				form.innerHTML = '{{form.form}}' + backup
+				input.setAttribute("value", "{{form.name}}");
+				form.appendChild(input);
+				return 0;
+			}
+		{% endfor %}
 
 	}
 	document.getElementById('Validate').addEventListener('click', () => {

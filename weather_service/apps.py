@@ -1,8 +1,11 @@
 from django.apps import AppConfig
 
-
+from .form import CityWeatherForm
+from .models import CityWeather
+from api.views import CityWeatherViewSet
+from api.serializers import CityWeatherSerializer
 class WeatherServiceConfig(AppConfig):
-	name = 'weather'
+	name = 'Weather'
 
 	about = {
         	"name": name,
@@ -13,6 +16,17 @@ class WeatherServiceConfig(AppConfig):
 				"name": "city" ,
 				"type": "string"
 			}],
-			"api_route": "city_weather",
 		}]
 	}
+
+	widgets = [{
+		"name": name,
+		"model": CityWeather,
+		"form": CityWeatherForm,
+		"api": {
+			"api_route": "city_weather",
+			"api_url": "/api/city_weather",
+			"ViewSet": CityWeatherViewSet,
+			"Serializer": CityWeatherSerializer
+		}
+	}]

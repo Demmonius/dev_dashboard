@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from weather_service.models import CityWeather
 from weather_service.apps import WeatherServiceConfig
 
+services = [WeatherServiceConfig]
 class Index(View):
 	def get(self, request):
 		return render(request, 'index.html', {
@@ -18,16 +19,28 @@ class Index(View):
 
 class AddWidget(View):
 	def get(self, request):
-		widgets = []
-		for services in [WeatherServiceConfig]:
-			for widget in services.about["widgets"]:
-				widgets.append({
-					'api_url': "/api/" + widget["api_route"],
+		forms = []
+		for service in services:
+			for widget in service.widgets:
+				forms.append({
 					'name': widget["name"],
-				})
+					'form': widget["form"](initial={'user': request.user})
+					})
 		return render(request, 'addWidget.html', {
-			'widgets': widgets
+			# 'widgets': [x.widgets for x in services],
+			'forms': forms
 		})
 	
 	def post(self, request):
-		pass
+		if request.POST["widget_name"] is None:
+			return redirect('addWidget')
+		for widgets in services:
+			for widget in widgets.widgets:
+				if widget["name"] == request.POST["widget_name"]:
+					form = widget["form"](request.POST)
+					if form.is_valid():
+						form.save(commit=False)
+						form.user = request.user
+						form.save()
+						return redirect('home')
+		return redirect('addWidget')
