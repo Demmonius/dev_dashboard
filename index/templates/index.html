@@ -3,22 +3,12 @@
 {% block title %}Main Page{% endblock %}
 
 {% block content %}
-{% for weather in widgets.weather %}
-<div class="col-xl-3 col-lg-6">
-		<div class="card">
-			<div class="card-body">
-				<div class="stat-widget-one">
-				<img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
-				    <div class="stat-content dib">
-				<div class="stat-text">{{ weather.city }}</div>
-				<div class="stat-digit">{{ weather.description }}</div>
-				<div class="stat-digit">{{ weather.temperature }}° F</div>
-			    </div>
-			</div>
-		    </div>
-		</div>
-	</div>
-{% endfor %}
+{% for widget in widgets %}
+	{% with widget.data as data %}
+	{% include widget.template %}
+	{% endwith %}
+	
+{% endfor %}	
 	<div class="card col-lg-2 col-md-6 no-padding no-shadow" id="add">
 		<div class="card-body bg-flat-color-2">
 			<div class="h1 text-muted text-right mb-4">
@@ -36,13 +26,7 @@
 		let addButton = document.getElementById('add');
 		addButton.style.cursor = 'pointer';
 		addButton.onclick = function() {
-			const win = window.open("/addWidget", "Add a widget in dashboard", 'resizable=0,width=350,height=250');
-			window.addEventListener('message', event => {
-  				if (event.origin === 'http://localhost:8080') {
-    					if (event.data === 'close')
-						win.close()
-				}
-			})
+			window.location.href = "/addWidget";
 		};
 </script>
 {% endblock %}

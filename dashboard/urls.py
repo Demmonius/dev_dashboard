@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 from about.views import About
-from weather_service.views import test
 
 urlpatterns = [
     path('about.json/', About.as_view(), name='about'),
@@ -25,6 +24,5 @@ urlpatterns = [
     path('', include('login.urls')),
     path('', include('index.urls')),
     path('api/', include('api.urls')),
-    path('weather/', test),
     
 ]

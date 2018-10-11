@@ -11,14 +11,22 @@ services = [
 	]
 class Index(View):
 	def get(self, request):
+		widgets = []
+		print(services)
+		for service in services:
+			print(service)
+			for widget in service.widgets:
+				for w in widget["model"].objects.filter(user=request.user):
+					widgets.append({
+						"template": "widgets/" + widget["name"] + ".html",
+						"template_name": widget["name"],
+						"data": w.get(),
+					})
 		return render(request, 'index.html', {
-			'widgets': {
-				'weather': [ x.getWeather() for x in CityWeather.objects.filter(user=request.user)]
-			}
+			'widgets': widgets,
 		})
 	def post(self, request):
 		pass
-
 class AddWidget(View):
 	def get(self, request):
 		forms = []
@@ -41,8 +49,8 @@ class AddWidget(View):
 				if widget["name"] == request.POST["widget_name"]:
 					form = widget["form"](request.POST)
 					if form.is_valid():
-						form.save(commit=False)
-						form.user = request.user
-						form.save()
+						f = form.save(commit=False)
+						f.user = request.user
+						f.save()
 						return redirect('home')
 		return redirect('addWidget')

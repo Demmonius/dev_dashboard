@@ -8,9 +8,9 @@ class CityWeather(models.Model):
 	city = models.CharField(max_length=30)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-	def getWeather(self):
+	def get(self):
 		city = self.city
-		url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=580ee204e0c4a86011a0e985d2a01091'
+		url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=580ee204e0c4a86011a0e985d2a01091'
 		city_weather = requests.get(url.format(city)).json()
 		return {
         		'city' : city,

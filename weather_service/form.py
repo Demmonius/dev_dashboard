@@ -5,7 +5,7 @@ from .models import CityWeather
 class CityWeatherForm(ModelForm):
 	class Meta:
 		model = CityWeather
-		fields = '__all__'
+		exclude = ['user']
 		widgets = {
 			'city': TextInput(attrs={'class': ' form-control'}),
         	}
