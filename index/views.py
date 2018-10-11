@@ -72,7 +72,6 @@ class Settings(View):
 		})
 
 	def post(self, request):
-		print(request.POST)
 		if request.POST["widget_name"] is None:
 			return redirect('settings')
 		for widgets in services:
