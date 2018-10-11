@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'about',
     'index',
     'login',
-    'news_service'
+    'news_service',
+    'spotify_service',
 ]
 
 MIDDLEWARE = [

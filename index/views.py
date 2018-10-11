@@ -3,18 +3,18 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-from weather_service.models import CityWeather
+from spotify_service.apps import SpotifyServiceConfig
 from weather_service.apps import WeatherServiceConfig
 
 services = [
 	WeatherServiceConfig,
+	SpotifyServiceConfig,
+
 	]
 class Index(View):
 	def get(self, request):
 		widgets = []
-		print(services)
 		for service in services:
-			print(service)
 			for widget in service.widgets:
 				for w in widget["model"].objects.filter(user=request.user):
 					widgets.append({
@@ -54,3 +54,39 @@ class AddWidget(View):
 						f.save()
 						return redirect('home')
 		return redirect('addWidget')
+
+class Settings(View):
+	def get(self, request):
+		forms = []
+		for service in services:
+			for widget in service.widgets:
+				for w in widget["model"].objects.filter(user=request.user):
+					forms.append({
+						'name': widget["name"],
+						'form': widget["form"](instance=w),
+						'object': w
+					})
+		print(forms)
+		return render(request, 'settings.html', {
+			'forms': forms,
+		})
+
+	def post(self, request):
+		print(request.POST)
+		if request.POST["widget_name"] is None:
+			return redirect('settings')
+		for widgets in services:
+			for widget in widgets.widgets:
+				if widget["name"] == request.POST["widget_name"]:
+					obj = widget["model"].objects.get(pk=request.POST["id"])
+					if request.POST.get('delete'):
+						print("DELETED")
+						obj.delete()
+						return redirect('home')
+					form = widget["form"](request.POST, instance=obj)
+					if form.is_valid():
+						f = form.save(commit=False)
+						f.user = request.user
+						f.save()
+						return redirect('home')
+		return redirect('settings')

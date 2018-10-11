@@ -19,15 +19,8 @@
 								<option value="{{form.name}}">{{form.name}}</option>
 							{% endfor %}
 						</select>
-						{% for form in forms%}
-							<form method="post" action="/addWidget/" name="addWidget" id="form" onsubmit="return closeSelf()">
-								{% csrf_token %}
-								
-								<button type="submit" id="Validate" class="btn btn-primary btn-sm">
-										<i class="fa fa-dot-circle-o"></i> Add
-									</button>
+							<form method="post" action="/addWidget/" name="addWidget" id="form">
 							</form>
-						{% endfor %}
 					    </div>
 				</div>
 			</div>
@@ -37,35 +30,44 @@
 {% endblock %}
 {% block script %}
 <script>
-	function closeSelf() {
-		document.forms['addWidget'].submit();
-		// window.close();
-	}
 	function updateWidgets() {
 		var e = document.getElementById("chooseWidget");
 		var value = e.options[e.selectedIndex].value;
 		var form = document.getElementById("form")
 		var input = document.createElement("input");
-
+		form.innerHTML = "";
 		input.setAttribute("type", "hidden");
 		input.setAttribute("name", "widget_name");
+
+		var inputElem = document.createElement('input');
+		inputElem.type = 'hidden';
+		inputElem.name = 'csrfmiddlewaretoken';
+		inputElem.value = '{{ csrf_token }}';
+
+		var button = document.createElement('button');
+		button.setAttribute('type', 'submit');
+		button.setAttribute('id', 'Validate');
+		button.setAttribute('type', 'submit');
+		button.setAttribute('class', 'btn btn-primary btn-sm');
+
+		var i = document.createElement('i');
+		i.setAttribute('class', 'fa fa-dot-circle-o');
+		button.appendChild(i);
+		button.innerHTML = "ADD";
+
+		form.appendChild(button);
 		{% for form in forms %}
 			if ("{{form.name}}" == value) {
 				let backup = form.innerHTML;
 				let lo = ""
-				{% for field in form.form %}
-				{% endfor %}
-				form.innerHTML = '{{form.form}}' + backup
+				form.innerHTML = `{{form.form}}` + backup
 				input.setAttribute("value", "{{form.name}}");
 				form.appendChild(input);
+				form.appendChild(inputElem);
 				return 0;
 			}
 		{% endfor %}
-
 	}
-	document.getElementById('Validate').addEventListener('click', () => {
-		window.opener.postMessage('close', 'http://localhost:8080')
-	});
 
         jQuery(document).ready(function() {
         jQuery(".standardSelect").chosen({
