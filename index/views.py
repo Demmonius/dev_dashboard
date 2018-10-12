@@ -5,12 +5,14 @@ from django.contrib.auth.decorators import login_required
 
 from spotify_service.apps import SpotifyServiceConfig
 from weather_service.apps import WeatherServiceConfig
+from news_service.apps import NewsServiceConfig
 
 services = [
 	WeatherServiceConfig,
 	SpotifyServiceConfig,
-
+	NewsServiceConfig,
 	]
+	
 class Index(View):
 	def get(self, request):
 		widgets = []

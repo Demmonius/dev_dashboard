@@ -1,8 +1,9 @@
 from django.apps import AppConfig
 
+from .form import NewsForm
 from .models import News
-from api.serializers import NewsSerializer
 from api.views import NewsViewSet
+from api.serializers import NewsSerializer
 
 class NewsServiceConfig(AppConfig):
 	name = 'news_service'
@@ -22,7 +23,7 @@ class NewsServiceConfig(AppConfig):
 	widgets = [{
 		"name": name,
 		"model": News,
-		#"form": CityWeatherForm,
+		"form": NewsForm,
 		"api": {
 			"api_route": "news",
 			"api_url": "/api/news",

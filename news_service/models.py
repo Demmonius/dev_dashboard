@@ -4,21 +4,37 @@ from django.contrib.auth.models import User
 import requests
 
 class News(models.Model):
-	topic = models.CharField(max_length = 30) 
+	TOPIC_CHOICES = (
+        ("lequipe", "l'Equipe"),
+        ('ign', 'IGN'),
+        ('les-echos', 'Les Echos'),
+        ('liberation', 'Liberation'),
+    )
+	topics = models.CharField(
+        max_length = 15,
+        choices = TOPIC_CHOICES,
+        default = 'IGN',
+    )
+	onglet_to_display = models.IntegerField()
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 
-	def getNews(self):
-		self.api_key = "12114335eeee4844ac4dd869fc9a7f66"
-		url = "https://newsapi.org/v2/top-headlines?sources={}&apiKey={}"
-		new_info = requests.get(url.format(self.topic, self.api_key)).json()
-		return {
-			'name' : new_info['articles'][0]['source']['name'],
-			'title' : new_info['articles'][0]['title'],
-			'pic' : new_info['articles'][0]['urlToImage']
-		}
+	
+
+	def get(self):
+		url = "https://newsapi.org/v2/top-headlines?sources={}&apiKey=12114335eeee4844ac4dd869fc9a7f66&pageSize={}"
+		new_info = requests.get(url.format(self.topics, self.onglet_to_display)).json()
+		tab = []
+		for elem in new_info['articles']:
+			tab.append({
+			'name' : elem['source']['name'],
+			'title' : elem['title'],
+			'pic' : elem['urlToImage']	
+			})
+
+		return {"tab" : tab}	
 
 	def __str__(self):
-		return "It's a new of: " + self.topic
+		return "It's a pac of " + self.onglet_to_display + " news of : " + self.topics
 
 	class Meta:
         	verbose_name_plural = 'News'
