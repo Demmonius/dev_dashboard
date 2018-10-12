@@ -20,7 +20,7 @@ class News(models.Model):
 
 	
 
-	def get(self):
+	def get(self, instance):
 		url = "https://newsapi.org/v2/top-headlines?sources={}&apiKey=12114335eeee4844ac4dd869fc9a7f66&pageSize={}"
 		new_info = requests.get(url.format(self.topics, self.onglet_to_display)).json()
 		tab = []
@@ -28,13 +28,16 @@ class News(models.Model):
 			tab.append({
 			'name' : elem['source']['name'],
 			'title' : elem['title'],
-			'pic' : elem['urlToImage']	
+			'pic' : elem['urlToImage'],
 			})
 
-		return {"tab" : tab}	
+		return {
+			"tab" : tab,
+			"id": instance.id,
+		}
 
 	def __str__(self):
-		return "It's a pac of " + self.onglet_to_display + " news of : " + self.topics
+		return "It's a pac of " + str(self.onglet_to_display) + " news of : " + self.topics
 
 	class Meta:
         	verbose_name_plural = 'News'

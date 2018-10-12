@@ -4,7 +4,7 @@
 
 <div class="w3-content w3-display-container">
     {% for el in data.tab %}
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container mySlides{{data.id}}">
       <img src="{{el.pic}}" style="width:100%">
       <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
         {{el.name}}
@@ -12,8 +12,8 @@
     </div>
     
     {% endfor %}
-    <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-    <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+    <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1, {{data.id}})">&#10094;</button>
+    <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1, {{data.id}})">&#10095;</button>
     
     </div>
     
@@ -24,15 +24,15 @@
 
 <script>
 var slideIndex = 1;
-showDivs(slideIndex);
+showDivs(slideIndex, {{data.id}});
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
+function plusDivs(n, i) {
+  showDivs(slideIndex += n, i);
 }
 
-function showDivs(n) {
+function showDivs(n, id) {
   var i;
-  var x = document.getElementsByClassName("mySlides");
+  var x = document.getElementsByClassName("mySlides" + id);
   if (n > x.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = x.length}
   for (i = 0; i < x.length; i++) {

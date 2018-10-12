@@ -22,8 +22,11 @@ class Index(View):
 					widgets.append({
 						"template": "widgets/" + widget["name"] + ".html",
 						"template_name": widget["name"],
-						"data": w.get(),
+						"data": w.get(w),
 					})
+		for w in widgets:
+			if w["template_name"] == 'news_service':
+				print(w["data"]["id"])
 		return render(request, 'index.html', {
 			'widgets': widgets,
 		})
@@ -68,6 +71,7 @@ class Settings(View):
 						'form': widget["form"](instance=w),
 						'object': w
 					})
+		print(forms)
 		return render(request, 'settings.html', {
 			'forms': forms,
 		})
