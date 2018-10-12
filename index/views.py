@@ -68,7 +68,6 @@ class Settings(View):
 						'form': widget["form"](instance=w),
 						'object': w
 					})
-		print(forms)
 		return render(request, 'settings.html', {
 			'forms': forms,
 		})
