@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 class SpotifyPlayer(models.Model):
 	title =  models.CharField(max_length=30)
 	url = models.CharField(max_length=300)
+	width = models.IntegerField(default='300')
+	height = models.IntegerField(default='380')
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def get(self, instance):
