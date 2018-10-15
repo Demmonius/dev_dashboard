@@ -5,16 +5,18 @@ import requests
 
 class News(models.Model):
 	TOPIC_CHOICES = (
-        ("lequipe", "l'Equipe"),
-        ('ign', 'IGN'),
-        ('les-echos', 'Les Echos'),
-        ('liberation', 'Liberation'),
-    )
+		("lequipe", "l'Equipe"),
+		('ign', 'IGN'),
+		('les-echos' , 'Les Echos'),
+		('liberation' , 'Liberation'),
+		('le-monde' , 'Le Monde'),
+		('wired' , 'Wired')
+		)
 	topics = models.CharField(
-        max_length = 15,
-        choices = TOPIC_CHOICES,
-        default = 'IGN',
-    )
+		max_length = 15,
+		choices = TOPIC_CHOICES,
+		default = 'IGN',
+		)
 	onglet_to_display = models.IntegerField()
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 
