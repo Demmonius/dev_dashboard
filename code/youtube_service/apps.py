@@ -26,8 +26,8 @@ class YoutubeServiceConfig(AppConfig):
 		"model": Youtube_subs,
 		"form": Youtube_subsForm,
 		"api": {
-			"api_route": "city_weather",
-			"api_url": "/api/city_weather",
+			"api_route": "youtube_subs",
+			"api_url": "/api/youtube_subs",
 			"ViewSet": YoutubeSubsViewSet,
 			"Serializer": YoutubeSubsSerializer
 		}
