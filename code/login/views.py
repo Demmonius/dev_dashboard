@@ -28,8 +28,9 @@ class SignIn(View):
 	def post(self, request):
 		username = request.POST.get('username', False)
 		password = request.POST.get('password', False)
-		user = authenticate(username=username, password=password)
-		if user is not None and user.is_active:
-			login(request, user)
-			return redirect('home')
+		if username is not None and password is not None:
+			user = authenticate(username=username, password=password)
+			if user is not None and user.is_active:
+				login(request, user)
+				return redirect('home')
 		return redirect('signin')
