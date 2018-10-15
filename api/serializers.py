@@ -5,6 +5,7 @@ from news_service.models import News
 from weather_service.models import CityWeather
 from spotify_service.models import SpotifyPlayer
 from youtube_service.models import Youtube_subs
+from gorafi.models import Gorafi
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -30,4 +31,9 @@ class SpotifyPlayerSerializer(serializers.HyperlinkedModelSerializer):
 class YoutubeSubsSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Youtube_subs
+		fields = '__all__'
+
+class GorafiSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Gorafi
 		fields = '__all__'

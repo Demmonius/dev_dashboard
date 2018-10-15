@@ -1,8 +1,8 @@
 from django.forms import ModelForm, TextInput
 
-from .models import News
+from .models import Gorafi
 
-class NewsForm(ModelForm):
+class GorafiForm(ModelForm):
 	class Meta:
-		model = News
+		model = Gorafi
 		exclude = ['user']

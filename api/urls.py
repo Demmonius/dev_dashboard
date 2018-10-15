@@ -7,6 +7,9 @@ from weather_service.apps import WeatherServiceConfig
 from news_service.apps import NewsServiceConfig
 from youtube_service.apps import YoutubeServiceConfig
 
+from gorafi.apps import GorafiServiceConfig
+
+
 router = routers.DefaultRouter()
 
 for service in [
