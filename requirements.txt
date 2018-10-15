@@ -6,3 +6,5 @@ ConfigParser
 mysqlclient
 requests
 feedparser
+Gunicorn
+whitenoise
