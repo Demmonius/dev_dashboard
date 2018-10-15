@@ -1,1 +1,1 @@
-web: gunicorn dashboard.wsgi --log-file -
+web: gunicorn --chdir code dashboard.wsgi --log-file -
