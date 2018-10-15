@@ -16,6 +16,7 @@ class News(models.Model):
 		max_length = 15,
 		choices = TOPIC_CHOICES,
 		default = 'IGN',
+		help_text = 'Unique identifier for the student '
 		)
 	onglet_to_display = models.IntegerField()
 	user = models.ForeignKey(User, on_delete = models.CASCADE)

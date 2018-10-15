@@ -9,6 +9,7 @@ import feedparser
 class Gorafi(models.Model): 
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	onglet_to_display = models.IntegerField(default = -1)
+	
 	def get(self, instance):
 		url = "http://www.legorafi.fr/feed/"
 		feed = feedparser.parse(url)
@@ -18,7 +19,7 @@ class Gorafi(models.Model):
 			'name' : "Le Gorafi",
 			'title' : elem['title'],
 			'pic' : elem['custom_thumbnail'],
-			'link' : elem['link'][0]["href"],
+			'link' : elem['links'][0]["href"],
 			})
 		return {
 			"tab" : tab,
