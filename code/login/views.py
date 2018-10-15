@@ -18,6 +18,7 @@ class SignUp(View):
             		user = authenticate(username=username, password=raw_password)
             		login(request, user)
             		return redirect('signin')
+		return redirect('signup')
 	
 
 class SignIn(View):
