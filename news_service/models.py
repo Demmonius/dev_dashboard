@@ -29,6 +29,7 @@ class News(models.Model):
 			'name' : elem['source']['name'],
 			'title' : elem['title'],
 			'pic' : elem['urlToImage'],
+			'link' : elem['url'],
 			})
 
 		return {

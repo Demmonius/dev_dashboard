@@ -5,7 +5,9 @@
 <div class="w3-content w3-display-container">
     {% for el in data.tab %}
     <div class="w3-display-container mySlides{{data.id}}">
-      <img src="{{el.pic}}" style="width:200%">
+      <a href="{{el.link}}">
+        <img src="{{el.pic}}" style="width:200%">
+      </a>
       <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
         {{el.name}}
         <p>{{el.title}}</p>
