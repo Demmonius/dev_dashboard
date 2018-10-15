@@ -25,7 +25,7 @@ class GorafiServiceConfig(AppConfig):
     widgets = [{
 		"name": name,
 		"model": Gorafi,
-		"form": Gorafi,
+		"form": GorafiForm,
 		"api": {
 			"api_route": "Gorafi",
 			"api_url": "/api/Gorafi",
