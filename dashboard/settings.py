@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'login',
     'news_service',
     'spotify_service',
+    'youtube_service',
 ]
 
 MIDDLEWARE = [

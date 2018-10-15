@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from news_service.models import News
 from weather_service.models import CityWeather
 from spotify_service.models import SpotifyPlayer
-from .serializers import CityWeatherSerializer, UserSerializer, NewsSerializer, SpotifyPlayerSerializer
+from youtube_service.models import Youtube_subs
+from .serializers import CityWeatherSerializer, UserSerializer, NewsSerializer, SpotifyPlayerSerializer, YoutubeSubsSerializer
 
 # Create your views here.
 
@@ -25,3 +26,7 @@ class NewsViewSet(viewsets.ModelViewSet):
 class SpotifyPlayerViewSet(viewsets.ModelViewSet):
 	queryset = SpotifyPlayer.objects.all()
 	serializer_class = SpotifyPlayerSerializer
+
+class YoutubeSubsViewSet(viewsets.ModelViewSet):
+	queryset = Youtube_subs.objects.all()
+	serializer_class = YoutubeSubsSerializer

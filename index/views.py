@@ -6,11 +6,13 @@ from django.contrib.auth.decorators import login_required
 from spotify_service.apps import SpotifyServiceConfig
 from weather_service.apps import WeatherServiceConfig
 from news_service.apps import NewsServiceConfig
+from youtube_service.apps import YoutubeServiceConfig
 
 services = [
 	WeatherServiceConfig,
 	SpotifyServiceConfig,
 	NewsServiceConfig,
+	YoutubeServiceConfig,
 	]
 	
 class Index(View):
