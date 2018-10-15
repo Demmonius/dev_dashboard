@@ -46,7 +46,6 @@ class AddWidget(View):
 					'form': widget["form"]()
 					})
 		return render(request, 'addWidget.html', {
-			# 'widgets': [x.widgets for x in services],
 			'forms': forms
 		})
 	

@@ -1,0 +1,8 @@
+Django
+djangorestframework
+markdown
+django-filter
+ConfigParser
+mysqlclient
+requests
+feedparser
