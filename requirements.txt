@@ -10,3 +10,4 @@ Gunicorn
 whitenoise
 django-heroku
 python-decouple
+psycopg2-binary
