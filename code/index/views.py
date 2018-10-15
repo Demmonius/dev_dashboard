@@ -7,12 +7,14 @@ from spotify_service.apps import SpotifyServiceConfig
 from weather_service.apps import WeatherServiceConfig
 from news_service.apps import NewsServiceConfig
 from youtube_service.apps import YoutubeServiceConfig
+from gorafi.apps import GorafiServiceConfig
 
 services = [
 	WeatherServiceConfig,
 	SpotifyServiceConfig,
 	NewsServiceConfig,
 	YoutubeServiceConfig,
+	GorafiServiceConfig,
 	]
 	
 class Index(View):
@@ -41,7 +43,7 @@ class AddWidget(View):
 			for widget in service.widgets:
 				forms.append({
 					'name': widget["name"],
-					'form': widget["form"](initial={'user': request.user})
+					'form': widget["form"]()
 					})
 		return render(request, 'addWidget.html', {
 			'forms': forms

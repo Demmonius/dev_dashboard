@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'login',
     'news_service',
     'spotify_service',
+    'gorafi',
     'youtube_service',
 ]
 
