@@ -8,3 +8,5 @@ requests
 feedparser
 Gunicorn
 whitenoise
+django-heroku
+python-decouple
