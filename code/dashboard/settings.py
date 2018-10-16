@@ -29,7 +29,7 @@ SECRET_KEY = 'y%6(!qxjufwwn%g5#@@wozanzlnrx=a=0*+%)45c!3#m55zu!k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['https://peaceful-earth-67399.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
