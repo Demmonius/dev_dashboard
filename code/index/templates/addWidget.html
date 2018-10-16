@@ -60,7 +60,7 @@
 			if ("{{form.name}}" == value) {
 				let backup = form.innerHTML;
 				let lo = ""
-				form.innerHTML = `{{form.form}}` + backup
+				form.innerHTML = `{{form.form|linebreaks}}` + backup
 				input.setAttribute("value", "{{form.name}}");
 				form.appendChild(input);
 				form.appendChild(inputElem);

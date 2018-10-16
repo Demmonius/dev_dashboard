@@ -8,6 +8,7 @@ python code/manage.py collectstatic --noinput
 
 # Apply database migrations
 echo "Apply database migrations"
+python code/manage.py makemigrations
 python code/manage.py migrate
 python code/manage.py migrate --run-syncdb
 
