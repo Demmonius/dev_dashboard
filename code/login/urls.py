@@ -7,4 +7,5 @@ from .views import SignUp, SignIn
 urlpatterns = [
     path('signup', SignUp.as_view(), name="signup"),
     path('signin', SignIn.as_view(), name='signin'),
+    path('auth/', include('social_django.urls', namespace='social')),
 ]

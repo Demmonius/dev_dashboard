@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from news_service.models import News
 from weather_service.models import CityWeather
 from spotify_service.models import SpotifyPlayer
-from youtube_service.models import Youtube_subs
+from youtube_service.models import Youtube_subs, Youtube_views
 from gorafi.models import Gorafi
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,4 +36,9 @@ class YoutubeSubsSerializer(serializers.HyperlinkedModelSerializer):
 class GorafiSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Gorafi
+		fields = '__all__'
+
+class Youtube_viewsSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Youtube_views
 		fields = '__all__'
