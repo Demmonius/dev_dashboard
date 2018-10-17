@@ -175,6 +175,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 LOGIN_URL = '/signin'
 LOGIN_REDIRECT_URL = 'home'
 
+LOGOUT_REDIRECT_URL = '/signin'
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '535361971689-7tme7i7oe0vibu22eif6jfcp1ckhrsst.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'FaXOKNKtyvRhNBB5-XowZk-g'
 

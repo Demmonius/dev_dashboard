@@ -7,7 +7,7 @@ from api.views import YoutubeSubsViewSet, Youtube_viewsViewSet
 from api.serializers import YoutubeSubsSerializer
 
 class YoutubeServiceConfig(AppConfig):
-    name = 'Youtube_Service'
+    name = 'Youtube'
 
     about = {
         	"name": name,
@@ -32,6 +32,7 @@ class YoutubeServiceConfig(AppConfig):
 		"name": about["widgets"][0]["name"],
 		"model": Youtube_subs,
 		"form": Youtube_subsForm,
+		"template_name": "Youtube_subs.html",
 		"api": {
 			"api_route": "youtube_subs",
 			"api_url": "/api/youtube_subs",
@@ -42,6 +43,7 @@ class YoutubeServiceConfig(AppConfig):
 		"name": about["widgets"][1]["name"],
 		"model": Youtube_views,
 		"form": Youtube_viewsForm,
+		"template_name": "Youtube_views.html",
 		"api": {
 			"api_route": "youtube_views",
 			"api_url": "/api/youtube_views",

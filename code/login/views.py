@@ -3,6 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views import View
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 # Create your views here.
 
 class SignUp(View):
@@ -34,3 +37,8 @@ class SignIn(View):
 				login(request, user)
 				return redirect('home')
 		return redirect('signin')
+
+@login_required
+def logoutView(request):
+	logout(request)
+	return redirect('home')

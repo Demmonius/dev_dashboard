@@ -22,6 +22,7 @@ class SpotifyServiceConfig(AppConfig):
 
 	widgets = [{
 		"name": about["widgets"][0]["name"],
+		"template_name": "SpotifyPlayer.html",
 		"model": SpotifyPlayer,
 		"form": SpotifyPlayerForm,
 		"api": {

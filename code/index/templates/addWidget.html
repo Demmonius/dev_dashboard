@@ -11,16 +11,17 @@
 					<div class="card-header">
 						<strong class="card-title">Standard Select</strong>
 				    	</div>
-				    	<div class="card-body">
-						<select onchange="updateWidgets()" data-placeholder="Choose a service to add" class="standardSelect" tabindex="1" id="chooseWidget">
-							<option value=""></option>
-							{% for form in forms%}
-								<!-- <option value="{{widget.api_route}}">{{widget.name}}</option> -->
-								<option value="{{form.name}}">{{form.name}}</option>
-							{% endfor %}
-						</select>
-							<form method="post" action="/addWidget/" name="addWidget" id="form">
-							</form>
+				    	<div class="card-body" id="services">
+						    <select onchange="updateServices()" data-placeholder="Choose a service to add" class="standardSelect" tabindex="1" id="chooseService">
+							    <option value=""></option>
+							    {% for form in forms%}
+							    <option value="{{form.service}}">{{form.service}}</option>
+							    {% endfor %}
+							</select>
+						<div id="selectWdiget">
+						</div>
+						<form method="post" action="/addWidget/" name="addWidget" id="form">
+						</form>
 					    </div>
 				</div>
 			</div>
@@ -30,6 +31,34 @@
 {% endblock %}
 {% block script %}
 <script>
+	function updateServices() {
+		document.getElementById("form").innerHTML = "";
+		var services = document.getElementById("selectWdiget")
+		var e = document.getElementById("chooseService");
+		var value = e.options[e.selectedIndex].value;
+		var select = document.createElement("select");
+		services.innerHTML = "";
+		select.setAttribute("onchange", "updateWidgets()");
+		select.setAttribute("data-placeholder", "Choose a Widget to add");
+		select.setAttribute("class", "standardSelect");
+		select.setAttribute("tabindex", "1");
+		select.setAttribute("id", "chooseWidget");
+		var option = document.createElement("option");
+		option.setAttribute("value", "");
+		select.appendChild(option)
+		{% for service in forms %}
+			if ("{{service.service}}" == value) {
+				{% for widget in service.widgets %}
+					option = document.createElement("option");
+					option.setAttribute("value", "{{widget.name}}")
+					option.innerHTML = "{{widget.name}}"
+					select.appendChild(option)
+				{% endfor %}
+				services.appendChild(select);
+			}
+		{% endfor %}
+		
+	}
 	function updateWidgets() {
 		var e = document.getElementById("chooseWidget");
 		var value = e.options[e.selectedIndex].value;
@@ -55,17 +84,18 @@
 		button.appendChild(i);
 		button.innerHTML = "ADD";
 
-		form.appendChild(button);
-		{% for form in forms %}
-			if ("{{form.name}}" == value) {
-				let backup = form.innerHTML;
-				let lo = ""
-				form.innerHTML = `{{form.form|linebreaks}}` + backup
-				input.setAttribute("value", "{{form.name}}");
-				form.appendChild(input);
-				form.appendChild(inputElem);
-				return 0;
-			}
+		{% for service in forms %}
+			{% for widget in service.widgets %}
+				if ("{{widget.name}}" == value) {
+					input.setAttribute("value", "{{widget.name}}");
+					let b = form.innerHTML;
+					form.innerHTML = `{{widget.form}}` + b;
+					form.appendChild(button);
+					form.appendChild(inputElem);
+					form.appendChild(input)
+					return 0;
+				}
+			{% endfor %}
 		{% endfor %}
 	}
 

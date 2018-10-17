@@ -6,12 +6,12 @@ from api.views import NewsViewSet
 from api.serializers import NewsSerializer
 
 class NewsServiceConfig(AppConfig):
-	name = 'news_service'
+	name = 'News'
 
 	about = {
         	"name": name,
         	"widgets": [{
-			"name": "News" ,
+			"name": "Last news",
         	    	"description": "Show the news" ,
         	    	"params": [{
 				"name": "topic" ,
@@ -21,7 +21,7 @@ class NewsServiceConfig(AppConfig):
 	}
 
 	widgets = [{
-		"name": name,
+		"name": about["widgets"][0]["name"],
 		"model": News,
 		"form": NewsForm,
 		"api": {
