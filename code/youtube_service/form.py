@@ -17,3 +17,6 @@ class Youtube_viewsForm(ModelForm):
 		widgets = {
 			'channel': TextInput(attrs={'class': ' form-control'}),
         	}
+		labels = {
+            		'video': 'Video ID',
+        	}
