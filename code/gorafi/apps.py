@@ -8,7 +8,7 @@ from api.views import GorafiViewSet
 from api.serializers import GorafiSerializer
 
 class GorafiServiceConfig(AppConfig):
-    name = 'gorafi'
+    name = 'Gorafi'
 
     about = {
         	"name": name,
@@ -23,7 +23,8 @@ class GorafiServiceConfig(AppConfig):
 	}
 
     widgets = [{
-		"name": name,
+		"name": about["widgets"][0]["name"],
+		"template_name": "gorafi.html",
 		"model": Gorafi,
 		"form": GorafiForm,
 		"api": {

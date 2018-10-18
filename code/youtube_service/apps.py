@@ -1,13 +1,13 @@
 from django.apps import AppConfig
 
-from .models import Youtube_subs
-from .form import Youtube_subsForm
+from .models import Youtube_subs, Youtube_views
+from .form import Youtube_subsForm, Youtube_viewsForm
 
-from api.views import YoutubeSubsViewSet
+from api.views import YoutubeSubsViewSet, Youtube_viewsViewSet
 from api.serializers import YoutubeSubsSerializer
 
 class YoutubeServiceConfig(AppConfig):
-    name = 'Youtube_Service'
+    name = 'Youtube'
 
     about = {
         	"name": name,
@@ -18,6 +18,13 @@ class YoutubeServiceConfig(AppConfig):
 				        "name": "channel_name",
 				        "type": "string"
 			}],
+		}, {
+			"name": "Youtube_views",
+        	    	"description": "Stats about a video",
+        	    	"params": [{
+				        "name": "video id",
+				        "type": "string"
+			}],
 		}]
 	}
 
@@ -25,9 +32,21 @@ class YoutubeServiceConfig(AppConfig):
 		"name": about["widgets"][0]["name"],
 		"model": Youtube_subs,
 		"form": Youtube_subsForm,
+		"template_name": "Youtube_subs.html",
 		"api": {
 			"api_route": "youtube_subs",
 			"api_url": "/api/youtube_subs",
+			"ViewSet": YoutubeSubsViewSet,
+			"Serializer": YoutubeSubsSerializer
+		}
+	}, {
+		"name": about["widgets"][1]["name"],
+		"model": Youtube_views,
+		"form": Youtube_viewsForm,
+		"template_name": "Youtube_views.html",
+		"api": {
+			"api_route": "youtube_views",
+			"api_url": "/api/youtube_views",
 			"ViewSet": YoutubeSubsViewSet,
 			"Serializer": YoutubeSubsSerializer
 		}

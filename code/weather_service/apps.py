@@ -21,6 +21,7 @@ class WeatherServiceConfig(AppConfig):
 
 	widgets = [{
 		"name": name,
+		"template_name": "Weather.html",
 		"model": CityWeather,
 		"form": CityWeatherForm,
 		"api": {

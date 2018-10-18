@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'social_django',
     'weather_service',
     'about',
     'index',
@@ -78,10 +79,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+ 'social_core.backends.open_id.OpenIdAuth',
+ 'social_core.backends.google.GoogleOpenId',
+ 'social_core.backends.google.GoogleOAuth2',
+ 'social_core.backends.github.GithubOAuth2',
+ 'social_core.backends.facebook.FacebookOAuth2',
+ 
+ 'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'dashboard.wsgi.application'
 
@@ -160,5 +173,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'login/static'), )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = '/signin'
+LOGIN_REDIRECT_URL = 'home'
+
+LOGOUT_REDIRECT_URL = '/signin'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '535361971689-7tme7i7oe0vibu22eif6jfcp1ckhrsst.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'FaXOKNKtyvRhNBB5-XowZk-g'
 
 django_heroku.settings(locals())
