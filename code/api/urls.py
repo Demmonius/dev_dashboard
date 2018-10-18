@@ -15,14 +15,15 @@ router = routers.DefaultRouter()
 for service in [
 	WeatherServiceConfig,
 	NewsServiceConfig,
-	YoutubeServiceConfig
+	YoutubeServiceConfig,
+	GorafiServiceConfig,
 	]:
 	for widget in service.widgets:
-        	router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])
+		router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])
 router.register('users', UserViewSet)
 
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls'))
+	path('', include(router.urls)),
+	path('api-auth/', include('rest_framework.urls'))
 ]

@@ -25,4 +25,4 @@ class Youtube_subs(models.Model):
 	def __str__(self):
 		return "Subs of " + self.channel
 	class Meta:
-        	verbose_name_plural = 'Channels subs'
+		verbose_name_plural = 'Channels subs'
