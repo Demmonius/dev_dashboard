@@ -15,10 +15,11 @@ router = routers.DefaultRouter()
 for service in [
 	WeatherServiceConfig,
 	NewsServiceConfig,
-	YoutubeServiceConfig
+	YoutubeServiceConfig,
+	GorafiServiceConfig,
 	]:
 	for widget in service.widgets:
-        	router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])
+		router.register(widget["api"]["api_route"], widget["api"]["ViewSet"])
 router.register('users', UserViewSet)
 
 

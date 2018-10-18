@@ -8,7 +8,7 @@ import feedparser
 
 class Gorafi(models.Model): 
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
-	onglet_to_display = models.IntegerField(default = -1)
+	onglet_to_display = models.IntegerField(default = 1)
 	
 	def get(self, instance):
 		url = "http://www.legorafi.fr/feed/"
