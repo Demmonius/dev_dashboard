@@ -22,6 +22,7 @@ class NewsServiceConfig(AppConfig):
 
 	widgets = [{
 		"name": about["widgets"][0]["name"],
+		"template_name": "news_service.html",
 		"model": News,
 		"form": NewsForm,
 		"api": {
