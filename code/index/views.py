@@ -28,6 +28,7 @@ class Index(View):
 						"template_name": widget["template_name"],
 						"data": w.get(w),
 					})
+		print(widgets)
 		return render(request, 'index.html', {
 			'widgets': widgets,
 		})
@@ -47,7 +48,6 @@ class AddWidget(View):
 				"service": service.name,
 				"widgets": w
 			})
-		print(forms)
 		return render(request, 'addWidget.html', {
 			'forms': forms
 		})
@@ -59,6 +59,8 @@ class AddWidget(View):
 			for widget in widgets.widgets:
 				if widget["name"] == request.POST["widget_name"]:
 					form = widget["form"](request.POST)
+					print(widget["form"])
+					print(form)
 					if form.is_valid():
 						f = form.save(commit=False)
 						f.user = request.user
@@ -91,7 +93,6 @@ class Settings(View):
 				if widget["name"] == request.POST["widget_name"]:
 					obj = widget["model"].objects.get(pk=request.POST["id"])
 					if request.POST.get('delete'):
-						print("DELETED")
 						obj.delete()
 						return redirect('home')
 					form = widget["form"](request.POST, instance=obj)

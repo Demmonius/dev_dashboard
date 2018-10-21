@@ -5,6 +5,20 @@ from django.views import View
 from django.http import HttpResponse, JsonResponse
 
 from weather_service.apps import WeatherServiceConfig
+from gorafi.apps import GorafiServiceConfig
+from news_service.apps import NewsServiceConfig
+from spotify_service.apps import SpotifyServiceConfig
+from weather_service.apps import WeatherServiceConfig
+from youtube_service.apps import YoutubeServiceConfig
+
+services = [
+	WeatherServiceConfig,
+	GorafiServiceConfig,
+	NewsServiceConfig,
+	SpotifyServiceConfig,
+	WeatherServiceConfig,
+	YoutubeServiceConfig,
+]
 
 class About(View):
 	def get(self, request):
@@ -14,7 +28,7 @@ class About(View):
 			},
 			"server": {
 				"current_time": int(time.time()),
-				"services": [x.about for x in [WeatherServiceConfig]]
+				"services": [x.about for x in services]
 			}
 		})
 	def get_client_ip(self, request):

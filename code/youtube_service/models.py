@@ -32,8 +32,8 @@ class Youtube_views(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def get(self, instance):
-		data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + self.video + "&key=" + key).read()
-		if len(json.loads(data)["items"]) == 0:
+		data = json.loads(urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + self.video + "&key=" + key).read())
+		if len(data["items"]) == 0:
 			return {'error': "Can't find video with video_id " + self.video}
 		return {
 			'views': json.loads(data)["items"][0]["statistics"]["viewCount"],
@@ -47,3 +47,28 @@ class Youtube_views(models.Model):
 		return "Subs of " + self.video
 	class Meta:
         	verbose_name_plural = 'Videos view'
+
+class Youtube_popular(models.Model):
+	nb = models.IntegerField(default=5)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, default=5)
+
+	def get(self, instance):
+		videos = []
+		try:
+			data = json.loads(urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&regionCode=FR&maxResults="+ str(instance.nb) +"&key=" + key).read())
+		except urllib.error.HTTPError:
+			return {'error': "Error loading"}
+		if len(data["items"]) == 0:
+			return {'error': "Error loading"}
+		print(data)
+		print("ID", [video["id"] for video in data["items"]])
+		return {
+			"videos": {
+				"id": [video["id"] for video in data["items"]]
+			}
+		}
+
+	def __str__(self):
+		return str(self.nb) + " popular videos"
+	class Meta:
+        	verbose_name_plural = 'Best Videos'

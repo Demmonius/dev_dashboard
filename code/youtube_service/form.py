@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput
 
-from .models import Youtube_subs, Youtube_views
+from .models import Youtube_subs, Youtube_views, Youtube_popular
 
 class Youtube_subsForm(ModelForm):
 	class Meta:
@@ -19,4 +19,15 @@ class Youtube_viewsForm(ModelForm):
         	}
 		labels = {
             		'video': 'Video ID',
+        	}
+
+class Youtube_popularForm(ModelForm):
+	class Meta:
+		model = Youtube_popular
+		exclude = ['user']
+		widgets = {
+			'nb': TextInput(attrs={'class': ' form-control'}),
+        	}
+		labels = {
+            		'nb': 'Number of videos',
         	}
