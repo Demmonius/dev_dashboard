@@ -36,10 +36,10 @@ class Youtube_views(models.Model):
 		if len(data["items"]) == 0:
 			return {'error': "Can't find video with video_id " + self.video}
 		return {
-			'views': json.loads(data)["items"][0]["statistics"]["viewCount"],
-			'likes': json.loads(data)["items"][0]["statistics"]["likeCount"],
-			'dislikes': json.loads(data)["items"][0]["statistics"]["dislikeCount"],
-			'comments': json.loads(data)["items"][0]["statistics"]["commentCount"],
+			'views': data["items"][0]["statistics"]["viewCount"],
+			'likes': data["items"][0]["statistics"]["likeCount"],
+			'dislikes': data["items"][0]["statistics"]["dislikeCount"],
+			'comments': data["items"][0]["statistics"]["commentCount"],
 			'video': instance.video
 		}
 
