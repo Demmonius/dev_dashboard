@@ -60,8 +60,6 @@ class Youtube_popular(models.Model):
 			return {'error': "Error loading"}
 		if len(data["items"]) == 0:
 			return {'error': "Error loading"}
-		print(data)
-		print("ID", [video["id"] for video in data["items"]])
 		return {
 			"videos": {
 				"id": [video["id"] for video in data["items"]]
