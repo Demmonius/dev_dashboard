@@ -14,5 +14,5 @@ jobs:
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
-        echo $test > test.txt
-        cat test.txt
+        echo $test > oui.txt
+        cat oui.txt
