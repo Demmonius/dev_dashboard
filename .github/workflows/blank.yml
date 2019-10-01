@@ -2,6 +2,12 @@ name: CI
 
 on: [push]
 
+inputs:
+  test:
+    description: 'Number of test'
+    required: true
+    default: '42'
+
 jobs:
   build:
 
@@ -10,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: echo Hello, world!
+      run: echo $INPUT_TEST
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
